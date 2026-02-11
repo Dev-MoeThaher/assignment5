@@ -172,23 +172,28 @@ function nextRound() {
 
 function guessLetter(letter) {
     if (!gameState.gameActive) return;
-    
+
     if (gameState.guessedLetters.includes(letter)) {
         return;
     }
-    
+
+    // BUG 4 FIX: Disable button after click (REQ-GM-01)
+    const button = document.getElementById('key-' + letter);
+    if (button) button.disabled = true;
+
     gameState.guessedLetters.push(letter);
-    
+
     if (!gameState.currentWord.includes(letter)) {
         gameState.wrongGuesses++;
         updateHangman();
     }
-    
+
     updateWordDisplay();
     updateWrongLetters();
     updateLives();
     checkGameStatus();
 }
+
 
 function updateWordDisplay() {
     const display = document.getElementById('wordDisplay');
