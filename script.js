@@ -95,11 +95,24 @@ function addWord() {
     const input = document.getElementById('newWord');
     const word = input.value.trim().toUpperCase();
 
+    // Prevent empty words (REQ-WB-02)
+    if (!word) {
+        alert('Word cannot be empty.');
+        return;
+    }
+
+    // BUG 2 FIX: Prevent duplicate words (REQ-WB-02)
+    if (wordBank.includes(word)) {
+        alert('That word already exists in the word bank.');
+        return;
+    }
+
     wordBank.push(word);
     input.value = '';
     saveWordBank();
     displayWordBank();
 }
+
 
 function editWord(index) {
     const newWord = prompt('Edit word:', wordBank[index]);
