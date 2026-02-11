@@ -95,11 +95,18 @@ function addWord() {
     const input = document.getElementById('newWord');
     const word = input.value.trim().toUpperCase();
 
+    // Prevent empty words (REQ-WB-02)
+    if (!word) {
+        alert('Word cannot be empty.');
+        return;
+    }
+
     wordBank.push(word);
     input.value = '';
     saveWordBank();
     displayWordBank();
 }
+
 
 function editWord(index) {
     const newWord = prompt('Edit word:', wordBank[index]);
