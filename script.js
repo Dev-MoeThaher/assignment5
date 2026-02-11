@@ -101,6 +101,12 @@ function addWord() {
         return;
     }
 
+    // BUG 2 FIX: Prevent duplicate words (REQ-WB-02)
+    if (wordBank.includes(word)) {
+        alert('That word already exists in the word bank.');
+        return;
+    }
+
     wordBank.push(word);
     input.value = '';
     saveWordBank();
